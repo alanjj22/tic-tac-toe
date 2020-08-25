@@ -1,94 +1,18 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-.main{
-    margin: 0px;
-    padding: 0px;
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(60, 129, 134);
-}
-
-.play-area{
-    min-height: 30vh;
-    width: 30vh;
-    background-color: rgb(255, 255, 255);  
-}
-
-.column{
-    display: inline-block;
-    border: 2px solid;
-    min-height: 10vh;
-    width: 10vh;
+.container{
     text-align: center;
 }
 
-#first{
-    border-width: 0px 0px 2px 0px;
+.board{
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 320px;
+
 }
 
-#second{
-    border-width: 0px 2px 2px 2px;
-}
-
-#third{
-    border-width: 0px 0px 2px 0px;
-}
-
-#fourth{
-    border-width: 0px;
-}
-
-#fifth{
-    border-width: 0px 2px 0px 2px;
-}
-
-#sixth{
-    border-width: 0px;
-}
-
-#seventh{
-    border-width: 2px 0px 0px 0px;
-}
-
-#eighth{
-    border-width: 2px 2px 0px 2px;
-}
-
-#ninth{
-    border-width: 2px 0px 0px 0px;
-}
-
-.buttons{
-    border: none;
-    border-radius: 5px;
-    width: 15vh;
-}
-
-.start, .reset{
-    width: 100%;
-    background-color: cadetblue;
-    color: rgb(255, 255, 255);
-}
-
-.start{
-    margin: 30px;
-    padding: 10px;
-}
-
-.reset{
-    margin-left: 30px;
-    padding: 10px;
-}
-
-.column p{
-    display: flex;
-    justify-content: center;
-    padding-top: 4.8vh; 
-    cursor: pointer;
+.square{
+    width: 80px;
+    height: 80px;
+    border: 1px solid black;
+    display: inline-block;
+    line-height: 80px;
 }
