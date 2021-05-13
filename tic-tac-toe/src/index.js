@@ -31,20 +31,13 @@ function calculateWinner (square) {
     return null;
 }
 
-class Board extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      square:Array(9).fill(null),
-      XisTrue:true
-    }
-  }
-
-  
+class Board extends React.Component { 
 
   handleClick(i){
   
-    const squares = this.state.square.slice();
+    const History = this.state.History;
+    const current = History[History.length-1];
+    const squares = current.square.slice();
     if(calculateWinner(squares) || squares[i]){
       return;
     }
@@ -52,25 +45,16 @@ class Board extends React.Component {
     squares[i]=(XisTrue ? "X" : "O");
     console.log(i);
     this.setState({
-      square:squares,
+      History:History.cocat([{squares:squares}]),
       XisTrue:!this.state.XisTrue
     })
   }
 
   renderSquare(i) {
-    return <Square value={this.state.square[i]} onClick={()=>this.handleClick(i)}/>;
+    return <Square value={this.props.square[i]} onClick={()=>this.props.handleClick(i)}/>;
   }
 
   render() {
-    const winner = calculateWinner(this.state.square);
-    let status;
-    if(winner){
-      status = 'Winner is: '+ winner;
-    }
-    else{
-      status = 'Next player: '+ (this.state.XisTrue ? "X" : "O");
-    }
-
     return (
       <div> 
         <div className="status">{status}</div>
@@ -95,14 +79,36 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      History: [{ square: Array(9).fill(null)}],
+      XisTrue: true,
+    }
+  }
+
   render() {
+    const History = this.state.History;
+    const current = History[History.length-1];
+    const winner = calculateWinner(current.square);
+
+    let status;
+    if(winner){
+      status = 'Winner is: '+ winner;
+    }
+    else{
+      status = 'Next player: '+ (this.state.XisTrue ? "X" : "O");
+    }
+
+
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board square={current.square}
+          onClick={(i)=>this.handleClick(i)}/>
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
+          <div>{status}</div>
           <ol>{/* TODO */}</ol>
         </div>
       </div>
