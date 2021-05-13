@@ -10,6 +10,27 @@ function Square (props){
   );
 }
 
+function calculateWinner (square) {
+    const Line = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6],
+    ];
+
+    for(let i=0; i<Line.length; i++){
+      const [a,b,c] = Line[i];
+      if(square[a] && square[a] === square[a] && square[b] === square[a] && square[c]){
+        return square[a];
+      }
+    }
+    return null;
+}
+
 class Board extends React.Component {
   constructor(props){
     super(props);
@@ -18,8 +39,15 @@ class Board extends React.Component {
       XisTrue:true
     }
   }
+
+  
+
   handleClick(i){
+  
     const squares = this.state.square.slice();
+    if(calculateWinner(squares) || squares[i]){
+      return;
+    }
     const XisTrue = this.state.XisTrue;
     squares[i]=(XisTrue ? "X" : "O");
     console.log(i);
@@ -34,7 +62,14 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: '+ (this.state.XisTrue ? "X" : "O");
+    const winner = calculateWinner(this.state.square);
+    let status
+    if(winner){
+      status = 'Winner is: '+ winner;
+    }
+    else{
+      status = 'Next player: '+ (this.state.XisTrue ? "X" : "O");
+    }
 
     return (
       <div> 
