@@ -24,7 +24,7 @@ function calculateWinner (square) {
 
     for(let i=0; i<Line.length; i++){
       const [a,b,c] = Line[i];
-      if(square[a] && square[a] === square[a] && square[b] === square[a] && square[c]){
+      if(square[a] === square[b] && square[a] === square[c]){
         return square[a];
       }
     }
@@ -63,7 +63,7 @@ class Board extends React.Component {
 
   render() {
     const winner = calculateWinner(this.state.square);
-    let status
+    let status;
     if(winner){
       status = 'Winner is: '+ winner;
     }
